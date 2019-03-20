@@ -8,6 +8,16 @@
       <i-form-item label="邮箱" prop="mail">
         <i-input v-model="formValidate.mail"></i-input>
       </i-form-item>
+      <i-form-item label="单选">
+        <i-checkbox v-model="formValidate.single"></i-checkbox>
+      </i-form-item>
+      <i-form-item label="多选组">
+        <i-checkbox-group v-model="group">
+          <i-checkbox :label="1">1</i-checkbox>
+          <i-checkbox :label="2">2</i-checkbox>
+          <i-checkbox :label="3">3</i-checkbox>
+        </i-checkbox-group>
+      </i-form-item>
     </i-form>
     <button @click="handleSubmit">提交</button>
     <button @click="handleReset">重置</button>
@@ -17,14 +27,17 @@
 import iForm from '../components/form/form.vue'
 import iFormItem from '../components/form/form-item.vue'
 import iInput from '../components/input/input.vue'
+import iCheckbox from '../components/checkbox/checkbox.vue'
+import iCheckboxGroup from '../components/checkbox/checkbox-group.vue'
 
 export default {
-  components: { iForm, iFormItem, iInput },
+  components: { iForm, iFormItem, iInput, iCheckbox, iCheckboxGroup },
   data () {
     return {
       formValidate: {
         name: '',
-        mail: ''
+        mail: '',
+        single: true
       },
       ruleValidate: {
         name: [
@@ -34,7 +47,8 @@ export default {
           { required: true, message: '邮箱不能为空', trigger: 'blur' },
           { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
         ]
-      }
+      },
+      group: []
     }
   },
   methods: {
