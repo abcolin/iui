@@ -34,6 +34,14 @@ export default new Router({
       // this generates a separate chunk (form.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "display" */ './views/display.vue')
+    },
+    {
+      path: '/alert',
+      name: 'alert',
+      // route level code-splitting
+      // this generates a separate chunk (form.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "alert" */ './views/alert.vue')
     }
   ]
 })
