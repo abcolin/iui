@@ -42,6 +42,11 @@ export default new Router({
       // this generates a separate chunk (form.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "alert" */ './views/alert.vue')
+    },
+    {
+      path: '/table-render',
+      name: 'table-render',
+      component: () => import(/* webpackChunkName: "table-render" */ './views/table-render.vue')
     }
   ]
 })
