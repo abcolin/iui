@@ -47,6 +47,11 @@ export default new Router({
       path: '/table-render',
       name: 'table-render',
       component: () => import(/* webpackChunkName: "table-render" */ './views/table-render.vue')
+    },
+    {
+      path: '/table-slot',
+      name: 'table-slot',
+      component: () => import(/* webpackChunkName: "table-render" */ './views/table-slot.vue')
     }
   ]
 })
