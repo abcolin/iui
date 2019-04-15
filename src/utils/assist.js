@@ -9,6 +9,8 @@ function findComponentUpward (context, componentName) {
       name = parent.$options.name
     }
   }
+
+  return parent
 }
 
 // 由一个组件，向上找到所有的指定组件
@@ -44,6 +46,8 @@ function findComponentDownward (context, componentName) {
       }
     }
   }
+
+  return children
 }
 
 // 由一个组件，向下找到所有的指定组件
@@ -65,10 +69,55 @@ function findBrothersComponents (context, componentName, exceptMe = true) {
   return res
 }
 
+function typeOf (obj) {
+  const toString = Object.prototype.toString
+  /* eslint-disable */
+  const map = {
+    '[object Boolean]'  : 'boolean',
+    '[object Number]'   : 'number',
+    '[object String]'   : 'string',
+    '[object Function]' : 'function',
+    '[object Array]'    : 'array',
+    '[object Date]'     : 'date',
+    '[object RegExp]'   : 'regExp',
+    '[object Undefined]': 'undefined',
+    '[object Null]'     : 'null',
+    '[object Object]'   : 'object'
+  }
+  /* eslint-enable */
+  return map[toString.call(obj)]
+}
+
+// deepCopy
+function deepCopy (data) {
+  const t = typeOf(data)
+  let o
+  if (t === 'array') {
+    o = []
+  } else if (t === 'object') {
+    o = {}
+  } else {
+    return data
+  }
+
+  if (t === 'array') {
+    for (let i = 0; i < data.length; i++) {
+      o.push(deepCopy(data[i]))
+    }
+  } else if (t === 'object') {
+    for (let i in data) {
+      o[i] = deepCopy(data[i])
+    }
+  }
+
+  return o
+}
+
 export {
   findComponentUpward,
   findComponentsUpward,
   findComponentDownward,
   findComponentsDownward,
-  findBrothersComponents
+  findBrothersComponents,
+  deepCopy
 }
